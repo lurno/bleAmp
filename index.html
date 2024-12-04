@@ -21,6 +21,7 @@
   <h2>Generator volt </h2>
   <p><span id="voltContainer">NaN</span></p>
   <h2>Generator ampere </h2>
+  <p><span id="ampereContainer">NaN</span></p>
   <p>Last reading: <span id="timestamp"></span></p>
   <h2>Control GPIO 2</h2>
   <button id="onButton">ON</button>
@@ -38,6 +39,7 @@
     const offButton = document.getElementById('offButton');
     const okButton = document.getElementById('okButton');
     const retrievedValue = document.getElementById('voltContainer');
+  const retrievedValue = document.getElementById('ampereContainer');
     const latestValueSent = document.getElementById('valueSent');
     const bleStateContainer = document.getElementById('bleState');
     const timestampContainer = document.getElementById('timestamp');
