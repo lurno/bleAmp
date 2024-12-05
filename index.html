@@ -19,7 +19,8 @@
   <button id="disconnectBleButton">Disconnect BLE Device</button>
   <p>BLE state: <strong><span id="bleState" style="color:#d13a30;">Disconnected</span></strong></p>
   <h2>Volts:</h2>
-  <p>V:<span id="valueContainer">NaN</span></p>
+  <p>Vv:<span id="voltContainer">NaN</span></p>
+  <p>A:<span id="ampereContainer">NaN</span></p>
   <p>Last reading: <span id="timestamp"></span></p>
   <h2>Control GPIO 2</h2>
   <button id="onButton">ON</button>
@@ -34,7 +35,8 @@
     const disconnectButton = document.getElementById('disconnectBleButton');
     const onButton = document.getElementById('onButton');
     const offButton = document.getElementById('offButton');
-    const retrievedValue = document.getElementById('valueContainer');
+    const retrievedValue = document.getElementById('voltContainer');
+    const ampereValue = document.getElementById('ampereContainer');
     const latestValueSent = document.getElementById('valueSent');
     const bleStateContainer = document.getElementById('bleState');
     const timestampContainer = document.getElementById('timestamp');
@@ -129,7 +131,10 @@
     function handleCharacteristicChange(event){
         const newValueReceived = new TextDecoder().decode(event.target.value);
         console.log("Characteristic value changed: ", newValueReceived);
+        const ampereValueReceived = new TextDecoder().decode(event.target.value);
+        console.log("Characteristic value changed: ", ampereValueReceived);
         retrievedValue.innerHTML = newValueReceived;
+        ampereValue.innerHTML = ampereValueReceived;
         timestampContainer.innerHTML = getDateTime();
     }
 
