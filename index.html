@@ -19,7 +19,7 @@
   <button id="disconnectBleButton">Disconnect BLE Device</button>
   <p>BLE state: <strong><span id="bleState" style="color:#d13a30;">Disconnected</span></strong></p>
   <h2>Fetched Value</h2>
-  <p><span id="valueContainer">NaN</span> Volt</p>
+//  <p><span id="valueContainer">NaN</span> Volt</p>
   <p>Value 1: <span id="value1"></span></p>
   <p>Value 2: <span id="value2"></span></p>
   <p>Value 3: <span id="value3"></span></p>
@@ -139,7 +139,7 @@
         timestampContainer.innerHTML = getDateTime();
     }
 
-	function parseDelimitedData(retrievedValue) {
+	function parseDelimitedData('valueContainer') {
 			const values = data.split(',');
 			const value1 = parseFloat(values[0]);
 			const value2 = parseFloat(values[1]);
