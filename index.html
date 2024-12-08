@@ -20,6 +20,12 @@
   <p>BLE state: <strong><span id="bleState" style="color:#d13a30;">Disconnected</span></strong></p>
   <h2>Fetched Value</h2>
   <p><span id="valueContainer">NaN</span> Volt</p>
+  <p>Value 1: <span id="value1"></span></p>
+  <p>Value 2: <span id="value2"></span></p>
+  <p>Value 3: <span id="value3"></span></p>
+  <p>Value 4: <span id="value4"></span></p>
+  <p>Value 5: <span id="value5"></span></p>
+  <p>Value 6: <span id="value6"></span></p>
   <p>Last reading: <span id="timestamp"></span></p>
   <h2>Control GPIO 2</h2>
   <button id="onButton">ON</button>
@@ -133,67 +139,90 @@
         timestampContainer.innerHTML = getDateTime();
     }
 
-    function writeOnCharacteristic(value){
-        if (bleServer && bleServer.connected) {
-            bleServiceFound.getCharacteristic(ledCharacteristic)
-            .then(characteristic => {
-                console.log("Found the LED characteristic: ", characteristic.uuid);
-                const data = new Uint8Array([value]);
-                return characteristic.writeValue(data);
-            })
-            .then(() => {
-                latestValueSent.innerHTML = value;
-                console.log("Value written to LEDcharacteristic:", value);
-            })
-            .catch(error => {
-                console.error("Error writing to the LED characteristic: ", error);
-            });
-        } else {
-            console.error ("Bluetooth is not connected. Cannot write to characteristic.")
-            window.alert("Bluetooth is not connected. Cannot write to characteristic. \n Connect to BLE first!")
-        }
-    }
+	function parseDelimitedData(newValueReceived) {
+			const values = data.split(',');
+			const value1 = parseFloat(values[0]);
+			const value2 = parseFloat(values[1]);
+			const value3 = parseFloat(values[2]);
+			const value4 = parseFloat(values[3]);
+			const value5 = parseFloat(values[4]);
+			const value6 = parseFloat(values[5]);
 
-    function disconnectDevice() {
-        console.log("Disconnect Device.");
-        if (bleServer && bleServer.connected) {
-            if (sensorCharacteristicFound) {
-                sensorCharacteristicFound.stopNotifications()
-                    .then(() => {
-                        console.log("Notifications Stopped");
-                        return bleServer.disconnect();
-                    })
-                    .then(() => {
-                        console.log("Device Disconnected");
-                        bleStateContainer.innerHTML = "Device Disconnected";
-                        bleStateContainer.style.color = "#d13a30";
+		       document.getElementById('value1').textContent = value1;
+                       document.getElementById('value2').textContent = value2;
+                       document.getElementById('value3').textContent = value3;
+		       document.getElementById('value4').textContent = value4;
+                       document.getElementById('value5').textContent = value5;
+                       document.getElementById('value6').textContent = value6;
+ 		}
 
-                    })
-                    .catch(error => {
-                        console.log("An error occurred:", error);
-                    });
-            } else {
-                console.log("No characteristic found to disconnect.");
-            }
-        } else {
-            // Throw an error if Bluetooth is not connected
-            console.error("Bluetooth is not connected.");
-            window.alert("Bluetooth is not connected.")
-        }
-    }
 
-    function getDateTime() {
-        var currentdate = new Date();
-        var day = ("00" + currentdate.getDate()).slice(-2); // Convert day to string and slice
-        var month = ("00" + (currentdate.getMonth() + 1)).slice(-2);
-        var year = currentdate.getFullYear();
-        var hours = ("00" + currentdate.getHours()).slice(-2);
-        var minutes = ("00" + currentdate.getMinutes()).slice(-2);
-        var seconds = ("00" + currentdate.getSeconds()).slice(-2);
+	function writeOnCharacteristic(value){
+			if (bleServer && bleServer.connected) {
+					bleServiceFound.getCharacteristic(ledCharacteristic)
+						.then(characteristic => {
+								console.log("Found the LED characteristic: ", characteristic.uuid);
+								const data = new Uint8Array([value]);
+								return characteristic.writeValue(data);
+							})
+						.then(() => {
+								latestValueSent.innerHTML = value;
+								console.log("Value written to LEDcharacteristic:", value);
+							})
+						.catch(error => {
+								console.error("Error writing to the LED characteristic: ", error);
+							});
+				} else {
+						console.error ("Bluetooth is not connected. Cannot write to characteristic.")
+						window.alert("Bluetooth is not connected. Cannot write to characteristic. \n Connect to BLE first!")
+					}
+		}
 
-        var datetime = day + "/" + month + "/" + year + " at " + hours + ":" + minutes + ":" + seconds;
-        return datetime;
-    }
+	function disconnectDevice() {
+			console.log("Disconnect Device.");
+			if (bleServer && bleServer.connected) {
+					if (sensorCharacteristicFound) {
+							sensorCharacteristicFound.stopNotifications()
+								.then(() => {
+										console.log("Notifications Stopped");
+										return bleServer.disconnect();
+									})
+								.then(() => {
+										console.log("Device Disconnected");
+										bleStateContainer.innerHTML = "Device Disconnected";
+										bleStateContainer.style.color = "#d13a30";
+
+									})
+								.catch(error => {
+										console.log("An error occurred:", error);
+									});
+						} else {
+								console.log("No characteristic found to disconnect.");
+							}
+				} else {
+						// Throw an error if Bluetooth is not connected
+						console.error("Bluetooth is not connected.");
+						window.alert("Bluetooth is not connected.")
+					}
+		}
+
+	function getDateTime() {
+			var currentdate = new Date();
+			var day = ("00" + currentdate.getDate()).slice(-2); // Convert day to string and slice
+			var month = ("00" + (currentdate.getMonth() + 1)).slice(-2);
+			var year = currentdate.getFullYear();
+			var hours = ("00" + currentdate.getHours()).slice(-2);
+			var minutes = ("00" + currentdate.getMinutes()).slice(-2);
+			var seconds = ("00" + currentdate.getSeconds()).slice(-2);
+
+			var datetime = day + "/" + month + "/" + year + " at " + hours + ":" + minutes + ":" + seconds;
+			return datetime;
+		}
+
+
+
+
+
 
 
 </script>
