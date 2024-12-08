@@ -136,7 +136,7 @@
     function handleCharacteristicChange(event){
         const newValueReceived = new TextDecoder().decode(event.target.value);
         console.log("Characteristic value changed: ", newValueReceived);
-        retrievedValue.innerHTML = newValueReceived;
+        parseDelimitedData = newValueReceived;
         timestampContainer.innerHTML = getDateTime();
     }
 
