@@ -199,7 +199,28 @@
             return `${day}/${month}/${year} at ${hours}:${minutes}:${seconds}`;
         }
 
-        function parseDelimitedData(data) {
+
+function parseDelimitedData(data) {
+    const values = data.split(',');
+    for (let i = 0; i < values.length && i < 6; i++) {
+        let value = parseFloat(values[i]);
+        if (!isNaN(value)) {
+            // Format the number to always show one decimal place
+            value = value.toFixed(1);
+        } else {
+            value = '-';
+        }
+        document.getElementById(`value${i + 1}`).textContent = value;
+    }
+}
+
+
+
+
+
+
+
+        function oldparseDelimitedData(data) {
             const values = data.split(',');
             for (let i = 0; i < values.length && i < 6; i++) {
                 const value = parseFloat(values[i]) || '-';
