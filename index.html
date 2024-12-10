@@ -206,7 +206,7 @@ function parseDelimitedData(data) {
         let value = parseFloat(values[i]);
         if (!isNaN(value)) {
             // Format the number to always show one decimal place
-            value = value.toFixed(1);
+            value = value.toFixed(2);
         } else {
             value = '-';
         }
