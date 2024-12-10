@@ -214,19 +214,6 @@ function parseDelimitedData(data) {
     }
 }
 
-
-
-
-
-
-
-        function oldparseDelimitedData(data) {
-            const values = data.split(',');
-            for (let i = 0; i < values.length && i < 6; i++) {
-                const value = parseFloat(values[i]) || '-';
-                document.getElementById(`value${i + 1}`).textContent = value;
-            }
-        }
     </script>
 </body>
 </html>
