@@ -113,6 +113,7 @@
                 characteristic.startNotifications();
                 console.log("Notifications Started.");
                 return characteristic.readValue();
+	    y = 39.0833 * ln(x) - 120.8354
             })
             .then(value => {
                 console.log("Read value:", value);
@@ -201,12 +202,14 @@
 
 
 function parseDelimitedData(data) {
+	int i = 1;
     const values = data.split(',');
     for (let i = 0; i < values.length && i < 6; i++) {
         let value = parseFloat(values[i]);
         if (!isNaN(value)) {
             // Format the number to always show one decimal place
-            value = value.toFixed(2);
+	
+            value = value.toFixed(i);
         } else {
             value = '-';
         }
