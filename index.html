@@ -200,16 +200,19 @@
             return `${day}/${month}/${year} at ${hours}:${minutes}:${seconds}`;
         }
 
-
 function parseDelimitedData(data) {
-	int i = 1;
     const values = data.split(',');
     for (let i = 0; i < values.length && i < 6; i++) {
+        let n;
+        if (i === 2) {
+            n = 0;
+        } else {
+            n = 1;
+        }
         let value = parseFloat(values[i]);
         if (!isNaN(value)) {
-            // Format the number to always show one decimal place
-	
-            value = value.toFixed(i);
+            // Format the number to always show n decimal places
+            value = value.toFixed(n);
         } else {
             value = '-';
         }
@@ -217,6 +220,6 @@ function parseDelimitedData(data) {
     }
 }
 
-    </script>
+</script>
 </body>
 </html>
