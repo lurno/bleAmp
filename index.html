@@ -205,8 +205,8 @@ function parseDelimitedData(data) {
     for (let i = 0; i < values.length && i < 6; i++) {
         let value = parseFloat(values[i]);
         if (!isNaN(value)) {
-            // Format the number to always show one decimal place
-            value = value.toFixed(1);
+            // Format the number to always show two decimal places
+            value = value.toFixed(2);
         } else {
             value = '-';
         }
@@ -214,19 +214,6 @@ function parseDelimitedData(data) {
     }
 }
 
-
-
-
-
-
-
-        function oldparseDelimitedData(data) {
-            const values = data.split(',');
-            for (let i = 0; i < values.length && i < 6; i++) {
-                const value = parseFloat(values[i]) || '-';
-                document.getElementById(`value${i + 1}`).textContent = value;
-            }
-        }
     </script>
 </body>
 </html>
